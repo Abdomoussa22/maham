@@ -1,38 +1,38 @@
-# Node.js
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
 node_modules
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+.pnp
+.pnp.js
 
-# Build outputs
-dist
-.next
-out
-.turbo
-
-# Logs
-logs
-*.log
-*.log.*
-
-# Environment variables
+# Local env files
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Testing
+coverage
 
-# Mac / Linux system files
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+.next/
+out/
+build
+dist
+
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
 .DS_Store
-Thumbs.db
+*.pem
