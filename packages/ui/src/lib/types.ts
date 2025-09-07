@@ -4,7 +4,7 @@ export type NavItem = {
   title: string;
   href: string;
   icon?: IconType;
-  badge?: string;
+  badge?: string | number;
   section?: string;
   children?: NavItem[];
 };
