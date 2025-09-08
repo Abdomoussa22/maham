@@ -20,6 +20,13 @@ export const defaultNav: NavItem[] = [
   },
     {
     section: "Overview",
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: LayoutDashboard as IconType,
+    
+  },
+    {
+    section: "Overview",
     title: "test",
     href: "/dashboard",
     icon: LayoutDashboard as IconType,
