@@ -5,7 +5,10 @@ export default function Page() {
     <main className="p-8 space-y-4">
       <h1 className="text-2xl font-semibold">main-app</h1>
       <div className="flex gap-3 flex-wrap">
-      </div>
+    <Button variant="default" size="sm">
+      icon ** New Branch
+    </Button>      </div>
+    
     </main>
   );
 }
