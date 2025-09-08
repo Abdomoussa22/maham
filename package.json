@@ -36,6 +36,7 @@
     "@floating-ui/react": "^0.27.16",
     "@headlessui/react": "^2.2.7",
     "lucide-react": "^0.542.0",
+    "react-countup": "^6.5.3",
     "rizzui": "^1.0.1"
   }
 }
