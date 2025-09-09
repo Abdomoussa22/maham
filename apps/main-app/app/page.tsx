@@ -4,9 +4,17 @@ import React, { useState } from "react";
 import {Button1} from '../../../packages/ui/src/components/buttons/button'
 import {Modal} from '../../../packages/ui/src/components/modal'
 import {StatsCard} from '../../../packages/ui/src/components/cards/stats-card'
+import {FormikModal} from '../../../packages/ui/src/components/modals/formik-modal'
+import {TextBoxFormik} from '../../../packages/ui/src/components/inputs/TextBoxFormik'
+import * as Yup from "yup";
 
 export default function Page() {
     const [isOpen, setIsOpen] = useState(false)
+
+      const validationSchema = Yup.object({
+    name: Yup.string().required("الاسم مطلوب"),
+    email: Yup.string().email("صيغة غير صحيحة").required("الإيميل مطلوب"),
+  });
 
   return (
     <main className="p-8 space-y-4">
@@ -31,20 +39,23 @@ export default function Page() {
         افتح المودال
       </button>
 
-        <Modal
+         <Button1 variant="default" onClick={() => setIsOpen(true)}>
+        افتح المودال
+      </Button1>
+
+      <FormikModal
         isOpen={isOpen}
-        title="تنبيه"
+        title="تسجيل جديد"
+        initialValues={{ name: "", email: "" }}
+        validationSchema={validationSchema}
+        onSubmit={(values) => console.log("🚀 Submitted:", values)}
         onClose={() => setIsOpen(false)}
-        onCancel={() => setIsOpen(false)}
-        onConfirm={() => {
-          alert("تم الضغط على موافق!");
-          setIsOpen(false);
-        }}
       >
-        <p>هذا هو محتوى المودال، يمكنك وضع أي عناصر هنا.</p>
-      </Modal>
-        </div>
-    
+        <TextBoxFormik label="الاسم" name="name" type="text" placeholder="أدخل اسمك" />
+        <TextBoxFormik label="الإيميل" name="email" type="email" placeholder="example@mail.com" />
+      </FormikModal>
+      </div>
     </main>
+    
   );
 }
