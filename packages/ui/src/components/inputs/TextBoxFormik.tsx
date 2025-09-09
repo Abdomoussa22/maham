@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import { useField } from "formik";
+'use client';
+import React from 'react';
+import { useField } from 'formik';
 
 type TextBoxProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -8,13 +8,25 @@ type TextBoxProps = React.InputHTMLAttributes<HTMLInputElement> & {
   name: string; // مطلوب من أجل Formik
 };
 
-export function TextBoxFormik({ label,placeholder, ...props }: TextBoxProps) {
+export function TextBoxFormik({ label, placeholder, ...props }: TextBoxProps) {
   const [field, meta] = useField(props);
+
+  const baseInputClasses =
+    'px-3 py-2 rounded-lg border outline-none transition focus:ring-2';
+
+  const borderClasses = meta.touched && meta.error
+    ? 'border-red-500 focus:ring-red-500'
+    : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400';
+
+  const bgTextClasses = 'bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100';
 
   return (
     <div className="flex flex-col gap-1 w-full">
       {/* Label */}
-      <label htmlFor={props.id || props.name} className="text-sm font-medium text-gray-700 dark:text-gray-200">
+      <label
+        htmlFor={props.id || props.name}
+        className="text-sm font-medium text-gray-700 dark:text-gray-200"
+      >
         {label}
       </label>
 
@@ -23,10 +35,7 @@ export function TextBoxFormik({ label,placeholder, ...props }: TextBoxProps) {
         {...field}
         {...props}
         placeholder={placeholder}
-        className={`px-3 py-2 rounded-lg border outline-none transition 
-          ${meta.touched && meta.error ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-blue-500"}
-          dark:bg-gray-800 dark:text-white
-        `}
+        className={`${baseInputClasses} ${borderClasses} ${bgTextClasses}`}
       />
 
       {/* Error Message */}
