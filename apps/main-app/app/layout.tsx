@@ -1,8 +1,7 @@
-
 import type { Metadata } from "next";
 import "@maham/theme/src/styles.css";
 import "./globals.css";
-import { AppShell, defaultNav } from "@maham/ui"; // ← عدّل الاسم لو مختلف
+import { AppShell, cn, defaultNav } from "@maham/ui"; // ← عدّل الاسم لو مختلف
 import { ThemeProvider } from "@maham/theme/src/providers/theme-provider";
 import Script from "next/script";
 
@@ -17,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning >
-       <head>
+    <html lang="en" suppressHydrationWarning>
+      <head>
         <Script id="maham-init" strategy="beforeInteractive">{`
           (function(){
             try{
@@ -30,7 +29,10 @@ export default function RootLayout({
           })();
         `}</Script>
       </head>
-      <body>
+      <body
+        suppressHydrationWarning
+        className={cn("min-h-screen bg-background text-foreground antialiased")}
+      >
         <ThemeProvider>
           <AppShell nav={defaultNav}>{children}</AppShell>
         </ThemeProvider>
