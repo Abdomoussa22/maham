@@ -1,9 +1,9 @@
-"use client";
-import React, { useEffect } from "react";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button1 } from "../buttons/button";
+'use client';
+import { Form, Formik } from 'formik';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import * as Yup from 'yup';
+import { Button1 } from '../buttons/button';
 
 type FormModalProps = {
   isOpen: boolean;
@@ -26,9 +26,9 @@ export function FormikModal({
 }: FormModalProps) {
   // ESC close
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
+    const handleKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
   return (
@@ -40,7 +40,7 @@ export function FormikModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-40"
+            className='fixed inset-0 bg-black/50 z-40'
             onClick={onClose}
           />
 
@@ -50,15 +50,15 @@ export function FormikModal({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 flex items-center justify-center z-50"
+            className='fixed inset-0 flex items-center justify-center z-50'
           >
-            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg w-full max-w-lg mx-4 overflow-hidden">
+            <div className='bg-white dark:bg-gray-900 rounded-xl shadow-lg w-full max-w-lg mx-4 overflow-hidden'>
               {/* Header */}
-              <div className="flex justify-between items-center px-6 py-3 border-b">
-                <h2 className="text-lg font-semibold">{title}</h2>
+              <div className='flex justify-between items-center px-6 py-3 border-b'>
+                <h2 className='text-lg font-semibold'>{title}</h2>
                 <button
                   onClick={onClose}
-                  className="text-gray-500 hover:text-gray-700 transition"
+                  className='text-gray-500 hover:text-gray-700 transition'
                 >
                   ✕
                 </button>
@@ -75,17 +75,25 @@ export function FormikModal({
                 }}
               >
                 {({ isSubmitting }) => (
-                  <Form className="flex flex-col">
+                  <Form className='flex flex-col'>
                     {/* Body */}
-                    <div className="px-6 py-4 space-y-4">{children}</div>
+                    <div className='px-6 py-4 space-y-4'>{children}</div>
 
                     {/* Footer */}
-                    <div className="flex justify-end gap-2 px-6 py-3 border-t">
-                      <Button1 variant="secondary" type="button" onClick={onClose}>
+                    <div className='flex justify-end gap-2 px-6 py-3 border-t'>
+                      <Button1
+                        variant='secondary'
+                        type='button'
+                        onClick={onClose}
+                      >
                         إغلاق
                       </Button1>
-                      <Button1 variant="default" type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? "جاري الإرسال..." : "إرسال"}
+                      <Button1
+                        variant='default'
+                        type='submit'
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 'جاري الإرسال...' : 'إرسال'}
                       </Button1>
                     </div>
                   </Form>

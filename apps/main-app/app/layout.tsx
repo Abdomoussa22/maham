@@ -18,15 +18,15 @@
 //   );
 // }
 
-import type { Metadata } from "next";
-import "@maham/theme/src/styles.css";
-import "./globals.css";
-import { AppShell, defaultNav } from "@maham/ui"; // ← عدّل الاسم لو مختلف
-import { ThemeProvider } from "@maham/theme/src/providers/theme-provider";
+import { ThemeProvider } from '@maham/theme/src/providers/theme-provider';
+import '@maham/theme/src/styles.css';
+import { AppShell, defaultNav } from '@maham/ui'; // ← عدّل الاسم لو مختلف
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Maham – Main",
-  description: "Main app",
+  title: 'Maham – Main',
+  description: 'Main app',
 };
 
 export default function RootLayout({
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning>
       <body>
         <ThemeProvider>
           <AppShell nav={defaultNav}>{children}</AppShell>
