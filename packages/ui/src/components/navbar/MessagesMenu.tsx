@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Fragment } from "react";
 import { Dialog, Menu as HMenu, Transition } from "@headlessui/react";
 import { MessageSquare, X } from "lucide-react";
 import IconButton from "./icon-button";
@@ -18,6 +19,19 @@ export default function MessagesMenu() {
   const isMobile = useIsMobile();
   const dir = useDir();
   const [open, setOpen] = React.useState(false);
+
+  // 👇 gate يمنع أي اختلاف بين SSR و أول رندر على العميل
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
+
+  // أثناء SSR / أول hydration: زر ثابت غير تفاعلي (ما فيش dropdown)
+  if (!mounted) {
+    return (
+      <IconButton aria-label="Messages" dotColor="bg-emerald-500">
+        <MessageSquare className="size-4" />
+      </IconButton>
+    );
+  }
 
   if (isMobile) {
     return (
@@ -53,7 +67,7 @@ export default function MessagesMenu() {
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 -translate-y-2"
                 >
-                <Dialog.Panel className="fixed inset-x-0 top-14 sm:static sm:inset-auto rounded-b-2xl sm:rounded-2xl border bg-card text-card-foreground shadow-2xl max-h-[85vh] w-full sm:max-w-[22rem] pt-[env(safe-area-inset-top)]">
+                  <Dialog.Panel className="fixed inset-x-0 top-14 sm:static sm:inset-auto rounded-b-2xl sm:rounded-2xl border bg-card text-card-foreground shadow-2xl max-h-[85vh] w-full sm:max-w-[22rem] pt-[env(safe-area-inset-top)]">
                     <div className="flex items-center justify-between border-b p-3">
                       <Dialog.Title className="text-sm font-semibold">
                         Messages
@@ -61,6 +75,7 @@ export default function MessagesMenu() {
                       <button
                         className="rounded-md p-1 hover:bg-muted"
                         onClick={() => setOpen(false)}
+                        aria-label="Close"
                       >
                         <X className="size-4" />
                       </button>
@@ -91,16 +106,15 @@ export default function MessagesMenu() {
     );
   }
 
-  // Desktop dropdown
+  // Desktop dropdown (Hydration-safe بعد الـgate)
   return (
     <HMenu as="div" className="relative">
-      <HMenu.Button
-        as={IconButton}
-        aria-label="Messages"
-        dotColor="bg-emerald-500"
-      >
-        <MessageSquare className="size-4" />
+      <HMenu.Button as={Fragment}>
+        <IconButton aria-label="Messages" dotColor="bg-emerald-500">
+          <MessageSquare className="size-4" />
+        </IconButton>
       </HMenu.Button>
+
       <Transition
         enter="transition ease-out duration-100"
         enterFrom="opacity-0 translate-y-1"
@@ -112,7 +126,7 @@ export default function MessagesMenu() {
         <HMenu.Items
           className={cn(
             "absolute top-11 w-[22rem] rounded-lg border bg-card p-2 shadow-lg outline-none",
-            edgeClass(dir, "right-0", "left-0")
+            edgeClass(dir, "right-0 origin-top-right", "left-0 origin-top-left")
           )}
         >
           <div className="px-2 pb-2 text-xs font-semibold text-muted-foreground">

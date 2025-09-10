@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Menu } from "lucide-react";
+import Link from 'next/link'
 import { cn } from "../../lib/utils";
 import { defaultNav } from "../../config/nav";
 import { CommandSearchModal } from "../search/command-search-modal";
@@ -47,9 +48,6 @@ export default function Navbar({
 
         {/* لوجو/اسم + بحث الديسكتوب */}
         <div className="flex flex-1 items-center gap-3">
-          {/* <Link href="/" className="hidden md:block text-sm font-semibold">
-            Maham
-          </Link> */}
 
           {/* Search الديسكتوب */}
           <div className="ml-1 hidden md:block">

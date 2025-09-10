@@ -1,32 +1,13 @@
-// import '../app/globals.css';
-// import type { Metadata } from 'next';
-// import React from 'react';
-// import { ThemeProvider } from 'next-themes';
-// import { AppShell, defaultNav } from '@maham/ui'; // ← عدّل الاسم لو مختلف
-
-// export const metadata: Metadata = { title: 'Maham – Main', description: 'Main app' };
-
-// export default function RootLayout({ children }: { children: React.ReactNode }) {
-//   return (
-//     <html lang="en" suppressHydrationWarning>
-//       <body suppressHydrationWarning>
-//         <ThemeProvider attribute="data-theme" defaultTheme="light" enableSystem>
-//           <AppShell nav={defaultNav}>{children}</AppShell>
-//         </ThemeProvider>
-//       </body>
-//     </html>
-//   );
-// }
-
-import { ThemeProvider } from '@maham/theme/src/providers/theme-provider';
-import '@maham/theme/src/styles.css';
-import { AppShell, defaultNav } from '@maham/ui'; // ← عدّل الاسم لو مختلف
-import type { Metadata } from 'next';
-import './globals.css';
+import type { Metadata } from "next";
+import "@maham/theme/src/styles.css";
+import "./globals.css";
+import { AppShell, cn, defaultNav } from "@maham/ui"; // ← عدّل الاسم لو مختلف
+import { ThemeProvider } from "@maham/theme/src/providers/theme-provider";
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: 'Maham – Main',
-  description: 'Main app',
+  title: "Maham – Main",
+  description: "Main app",
 };
 
 export default function RootLayout({
@@ -35,8 +16,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script id="maham-init" strategy="beforeInteractive">{`
+          (function(){
+            try{
+              var b = localStorage.getItem('maham-brand'); 
+              if (b) document.documentElement.setAttribute('data-brand', b);
+              var d = localStorage.getItem('ui_dir'); 
+              if (d) document.documentElement.setAttribute('dir', d);
+            }catch(e){}
+          })();
+        `}</Script>
+      </head>
+      <body
+        suppressHydrationWarning
+        className={cn("min-h-screen bg-background text-foreground antialiased")}
+      >
         <ThemeProvider>
           <AppShell nav={defaultNav}>{children}</AppShell>
         </ThemeProvider>

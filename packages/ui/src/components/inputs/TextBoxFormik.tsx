@@ -4,11 +4,29 @@ import React from 'react';
 
 type TextBoxProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
-  name: string; // مطلوب من أجل Formik
+  placeholder?: string;
+  inputClassName?: string; // ✅ Add this explicitly
+  name: string; // required for Formik
 };
 
-export function TextBoxFormik({ label, ...props }: TextBoxProps) {
+export function TextBoxFormik({
+  label,
+  placeholder,
+  inputClassName = '',
+  ...props
+}: TextBoxProps) {
   const [field, meta] = useField(props);
+
+  const baseInputClasses =
+    'px-3 py-2 rounded-lg border outline-none transition focus:ring-2';
+
+  const borderClasses =
+    meta.touched && meta.error
+      ? 'border-red-500 focus:ring-red-500'
+      : 'border-gray-300 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400';
+
+  const bgTextClasses =
+    'bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100';
 
   return (
     <div className='flex flex-col gap-1 w-full'>
@@ -23,11 +41,9 @@ export function TextBoxFormik({ label, ...props }: TextBoxProps) {
       {/* Input */}
       <input
         {...field}
-        {...props}
-        className={`px-3 py-2 rounded-lg border outline-none transition 
-          ${meta.touched && meta.error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'}
-          dark:bg-gray-800 dark:text-white
-        `}
+        {...props} // ✅ all other props except inputClassName
+        placeholder={placeholder}
+        className={`${baseInputClasses} ${borderClasses} ${bgTextClasses} ${inputClassName}`} // ✅ apply custom classes here
       />
 
       {/* Error Message */}

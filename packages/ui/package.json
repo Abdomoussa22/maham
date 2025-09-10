@@ -35,8 +35,9 @@
   "dependencies": {
     "@floating-ui/react": "^0.26.28",
     "@headlessui/react": "^2.2.7",
-    "formik": "^2.4.6",
     "framer-motion": "^12.23.12",
+    "formik": "^2.4.6",
+    "moment-hijri": "^3.0.0",
     "yup": "^1.7.0"
   }
 }

@@ -266,7 +266,7 @@ export function CommandSearchModal({
       <span>Search pages here</span>
       <span
         className={cn(
-          "pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-md bg-emerald-600 px-1.5 py-0.5 text-[10px] font-semibold text-white",
+          "pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-md bg-primary px-1.5 py-0.5 text-[10px] font-semibold text-primary-foreground",
           edge(dir, "right-2", "left-2")
         )}
       >

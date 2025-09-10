@@ -47,7 +47,20 @@
     --destructive-foreground: 210 40% 98%;
     --ring: 217.2 32.6% 17.5%;
   }
-
   * { @apply border-border; }
   body { @apply bg-background text-foreground; }
 }
+/* === Brand colors applied globally via :root[data-brand] === */
+@layer base {
+  :root[data-brand="blue"]   { --primary: 221 83% 53%;  --primary-foreground: 210 40% 98%; }
+  :root[data-brand="black"]  { --primary: 222.2 47.4% 11.2%; --primary-foreground: 210 40% 98%; }
+  :root[data-brand="teal"]   { --primary: 174 60% 40%;  --primary-foreground: 210 40% 98%; }
+  :root[data-brand="violet"] { --primary: 262 83% 58%;  --primary-foreground: 210 40% 98%; }
+  :root[data-brand="rose"]   { --primary: 346 77% 49%;  --primary-foreground: 210 40% 98%; }
+  :root[data-brand="yellow"] { --primary: 45 93% 47%;   --primary-foreground: 25 5% 12%; }
+
+  /* (اختياري) ضبط درجات خاصّة في الوضع الداكن لكل براند */
+  .dark:root[data-brand="yellow"] { --primary: 45 93% 52%; --primary-foreground: 25 5% 12%; }
+  .dark:root[data-brand="violet"] { --primary: 262 83% 60%; --primary-foreground: 210 40% 98%; }
+}
+
