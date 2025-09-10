@@ -1,6 +1,6 @@
 'use client';
 
-import { Form, Formik } from 'formik';
+import { Form, Formik } from './formik-form.tsx';
 import * as Yup from 'yup';
 import { Button1 } from '../buttons/button';
 import { TextBoxFormik } from '../inputs/TextBoxFormik';

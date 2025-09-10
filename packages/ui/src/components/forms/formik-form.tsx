@@ -1,7 +1,7 @@
-"use client";
-import React from "react";
-import { Formik, Form } from "formik";
-import { Button1 } from "../buttons/button";
+'use client';
+import { Form, Formik } from 'formik';
+import React from 'react';
+import { Button1 } from '../buttons/button';
 
 type FormikFormProps = {
   initialValues: Record<string, any>;
@@ -19,8 +19,8 @@ export function FormikForm({
   onSubmit,
   onReset,
   children,
-  submitText = "إرسال",
-  resetText = "إعادة تعيين",
+  submitText = 'إرسال',
+  resetText = 'إعادة تعيين',
 }: FormikFormProps) {
   return (
     <Formik
@@ -29,16 +29,16 @@ export function FormikForm({
       onSubmit={onSubmit}
     >
       {({ isSubmitting, handleReset }) => (
-        <Form className="flex flex-col gap-4">
+        <Form className='flex flex-col gap-4'>
           {/* Fields */}
           {children}
 
           {/* Buttons */}
-          <div className="flex gap-2 justify-end mt-4">
+          <div className='flex gap-2 justify-end mt-4'>
             {onReset && (
               <Button1
-                type="button"
-                variant="secondary"
+                type='button'
+                variant='secondary'
                 onClick={() => {
                   handleReset();
                   onReset();
@@ -47,8 +47,8 @@ export function FormikForm({
                 {resetText}
               </Button1>
             )}
-            <Button1 type="submit" variant="default" disabled={isSubmitting}>
-              {isSubmitting ? "جاري الإرسال..." : submitText}
+            <Button1 type='submit' variant='default' disabled={isSubmitting}>
+              {isSubmitting ? 'جاري الإرسال...' : submitText}
             </Button1>
           </div>
         </Form>

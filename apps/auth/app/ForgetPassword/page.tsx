@@ -1,24 +1,21 @@
 import AuthWrapperOne from '../../../../packages/auth/Layout/auth-wraper-one.tsx';
-import LoginForm from '../../../../packages/ui/src/components/forms/LoginForm.tsx';
+import ForgetForm from '../../../../packages/ui/src/components/forms/ForgetPassword.tsx';
 import UnderlineShape from '../../../../packages/ui/src/shapes/underline.tsx';
 
-export default function LogInPage() {
+export default function ForgetPassword() {
   return (
     <AuthWrapperOne
       title={
         <>
-          Welcome back{' '}
+          {'auth-reset-your'}{' '}
           <span className='relative inline-block'>
-            Sign in to
-            <UnderlineShape className='absolute -bottom-2 start-0 h-2.5 w-24 text-blue md:w-28 xl:-bottom-1.5 xl:w-36' />
-          </span>{' '}
-          continue
+            {'auth-password'}
+            <UnderlineShape className='absolute -bottom-2 end-0 h-2.5 w-28 text-blue xl:-bottom-1.5 xl:w-36' />
+          </span>
         </>
       }
-      description='Do not have an account yet? Sign up to get started.'
-      bannerTitle='Your personalized dashboard'
-      bannerDescription='Access insights, manage your profile, and explore all features with ease.'
-      isSocialLoginActive={true}
+      bannerTitle={'auth-sign-up-banner-title'}
+      bannerDescription={'auth-sign-up-banner-description'}
       pageImage={
         <div className='hidden w-7/12 items-center justify-center rounded-[20px] bg-gray-50 px-6 dark:bg-gray-100/40 lg:flex xl:justify-start 2xl:px-16'>
           <div className='pb-8 pt-10 text-center xl:pt-16 2xl:block 2xl:w-[1063px]'>
@@ -34,7 +31,7 @@ export default function LogInPage() {
         </div>
       }
     >
-      <LoginForm />
+      <ForgetForm />
     </AuthWrapperOne>
   );
 }

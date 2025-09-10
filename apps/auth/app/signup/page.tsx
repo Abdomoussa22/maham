@@ -1,5 +1,5 @@
 import AuthWrapperOne from '../../../../packages/auth/Layout/auth-wraper-one.tsx';
-import LoginForm from '../../../../packages/ui/src/components/forms/LoginForm.tsx';
+import SignupForm from '../../../../packages/ui/src/components/forms/SignupForm.tsx';
 import UnderlineShape from '../../../../packages/ui/src/shapes/underline.tsx';
 
 export default function SignInPage() {
@@ -34,7 +34,7 @@ export default function SignInPage() {
         </div>
       }
     >
-      <LoginForm />
+      <SignupForm />
     </AuthWrapperOne>
   );
 }

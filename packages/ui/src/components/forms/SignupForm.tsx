@@ -2,14 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { SubmitHandler } from 'react-hook-form';
-import { PiArrowRightBold } from 'react-icons/pi';
-import { Button, Checkbox, Input, Password, Text } from 'rizzui';
-import {
-  SignUpSchema,
-  signUpSchema,
-} from '../../utils/validators/signup.schema.ts';
-import { Form } from './signupMainForm.ts';
+import { Text } from 'rizzui';
+import { signUpSchema } from '../../utils/validators/signup.schema.ts';
+import { FormikForm } from '../forms/formik-form'; // ✅ using your wrapper
+import { TextBoxFormik } from '../inputs/TextBoxFormik';
+import { CheckboxFormik } from '../inputs/checkbox-formik';
 
 const initialValues = {
   firstName: '',
@@ -21,107 +18,99 @@ const initialValues = {
 };
 
 export default function SignUpForm() {
-  const [reset, setReset] = useState({});
+  const [reset, setReset] = useState(false);
 
-  const onSubmit: SubmitHandler<SignUpSchema> = data => {
-    console.log(data);
-    setReset({ ...initialValues, isAgreed: false });
+  const handleSubmit = async (values: typeof initialValues) => {
+    console.log('Signup data:', values);
+
+    // Simulate API signup call
+    await new Promise(res => setTimeout(res, 1000));
+
+    // Reset form
+    setReset(true);
   };
 
   return (
     <>
-      <Form<SignUpSchema>
-        validationSchema={signUpSchema}
-        resetValues={reset}
-        onSubmit={onSubmit}
-        useFormProps={{
-          defaultValues: initialValues,
-        }}
+      <FormikForm
+        initialValues={initialValues}
+        validationSchema={signUpSchema(msg => msg)} // ✅ pass t function or direct msg
+        onSubmit={handleSubmit}
+        onReset={() => setReset(false)}
+        submitText='Get Started'
+        resetText='Clear'
       >
-        {({ register, formState: { errors } }) => (
-          <div className='flex flex-col gap-x-4 gap-y-5 md:grid md:grid-cols-2 lg:gap-5'>
-            <Input
+        {/* Fields */}
+        <div className='flex flex-col gap-y-5'>
+          {/* First Name & Last Name Row */}
+          <div className='grid grid-cols-2 gap-x-4'>
+            <TextBoxFormik
+              name='firstName'
               type='text'
-              size='lg'
               label='First Name'
               placeholder='Enter your first name'
-              className='[&>label>span]:font-medium'
-              inputClassName='text-sm'
-              {...register('firstName')}
-              error={errors.firstName?.message}
             />
-            <Input
+            <TextBoxFormik
+              name='lastName'
               type='text'
-              size='lg'
               label='Last Name'
               placeholder='Enter your last name'
-              className='[&>label>span]:font-medium'
-              inputClassName='text-sm'
-              {...register('lastName')}
-              error={errors.lastName?.message}
             />
-            <Input
+          </div>
+
+          {/* Email, Password, Confirm Password */}
+          <div className='flex flex-col gap-y-5'>
+            <TextBoxFormik
+              name='email'
               type='email'
-              size='lg'
               label='Email'
-              className='col-span-2 [&>label>span]:font-medium'
-              inputClassName='text-sm'
               placeholder='Enter your email'
-              {...register('email')}
-              error={errors.email?.message}
             />
-            <Password
-              label='Password'
-              placeholder='Enter your password'
-              size='lg'
-              className='[&>label>span]:font-medium'
-              inputClassName='text-sm'
-              {...register('password')}
-              error={errors.password?.message}
-            />
-            <Password
-              label='Confirm Password'
-              placeholder='Enter confirm password'
-              size='lg'
-              className='[&>label>span]:font-medium'
-              inputClassName='text-sm'
-              {...register('confirmPassword')}
-              error={errors.confirmPassword?.message}
-            />
-            <div className='col-span-2 flex items-start '>
-              <Checkbox
-                {...register('isAgreed')}
-                className='[&>label>span]:font-medium [&>label]:items-start'
-                label={
-                  <>
-                    {'form-signup-agreement'}{' '}
-                    <Link
-                      href='/'
-                      className='font-medium text-blue transition-colors hover:underline'
-                    >
-                      {'form-terms'}
-                    </Link>{' '}
-                    &{' '}
-                    <Link
-                      href='/'
-                      className='font-medium text-blue transition-colors hover:underline'
-                    >
-                      {'form-privacy-policy'}
-                    </Link>
-                  </>
-                }
+
+            <div className='grid grid-cols-2 gap-x-4'>
+              <TextBoxFormik
+                name='password'
+                type='password'
+                label='Password'
+                placeholder='Enter your password'
+              />
+              <TextBoxFormik
+                name='confirmPassword'
+                type='password'
+                label='Confirm Password'
+                placeholder='Enter confirm password'
               />
             </div>
-            <Button size='lg' type='submit' className='col-span-2 mt-2'>
-              <span>Get Started</span>{' '}
-              <PiArrowRightBold className='ms-2 mt-0.5 h-5 w-5' />
-            </Button>
           </div>
-        )}
-      </Form>
+
+          {/* Checkbox */}
+          <div className='flex items-start'>
+            <CheckboxFormik
+              name='isAgreed'
+              label={
+                <div className='text-nowrap'>
+                  {'By signing up you have agreed to our '}{' '}
+                  <Link href='/' className='underline text-blue-600'>
+                    Terms
+                  </Link>{' '}
+                  &{' '}
+                  <Link href='/' className='underline text-blue-600'>
+                    Privacy Policy
+                  </Link>
+                </div>
+              }
+            />
+          </div>
+        </div>
+      </FormikForm>
+
+      {/* Already have account link */}
       <Text className='mt-6 text-center leading-loose text-gray-500 lg:mt-8 lg:text-start'>
-        {'form-already-have-an-account'}{' '}
-        <Link className='font-semibold text-gray-700 transition-colors hover:text-blue'>
+        {'Don’t have an account?'}{' '}
+        <Link
+          href='/auth/login'
+          className='font-semibold text-gray-700 transition-colors hover:text-blue'
+        >
           Sign In
         </Link>
       </Text>
