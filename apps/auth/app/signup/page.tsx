@@ -9,13 +9,13 @@ export default function SignInPage() {
         <>
           Welcome back{' '}
           <span className='relative inline-block'>
-            Sign in to
+            Join us and never miss a thing
             <UnderlineShape className='absolute -bottom-2 start-0 h-2.5 w-24 text-blue md:w-28 xl:-bottom-1.5 xl:w-36' />
           </span>{' '}
-          continue
+          - SIGN UP!
         </>
       }
-      description='Do not have an account yet? Sign up to get started.'
+      description='By signing up, you will gain access to exclusive content, special offers, and be the first to hear about exciting news and updates.'
       bannerTitle='Your personalized dashboard'
       bannerDescription='Access insights, manage your profile, and explore all features with ease.'
       isSocialLoginActive={true}

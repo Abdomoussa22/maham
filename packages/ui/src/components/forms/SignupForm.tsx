@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { PiArrowRightBold } from 'react-icons/pi';
 import { Text } from 'rizzui';
 import { signUpSchema } from '../../utils/validators/signup.schema.ts';
+import { Button } from '../button.tsx';
 import { FormikForm } from '../forms/formik-form'; // ✅ using your wrapper
 import { TextBoxFormik } from '../inputs/TextBoxFormik';
 import { CheckboxFormik } from '../inputs/checkbox-formik';
-
 const initialValues = {
   firstName: '',
   lastName: '',
@@ -101,6 +102,16 @@ export default function SignUpForm() {
               }
             />
           </div>
+        </div>
+        <div className='mt-4 flex justify-center w-full'>
+          <Button
+            type='submit'
+            className='flex justify-center items-center'
+            variant='default'
+          >
+            Get Started
+            <PiArrowRightBold />
+          </Button>
         </div>
       </FormikForm>
 

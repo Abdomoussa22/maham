@@ -15,7 +15,7 @@ export default function LogInPage() {
           continue
         </>
       }
-      description='Do not have an account yet? Sign up to get started.'
+      description='By signing up, you will gain access to exclusive content, special offers, and be the first to hear about exciting news and updates.'
       bannerTitle='Your personalized dashboard'
       bannerDescription='Access insights, manage your profile, and explore all features with ease.'
       isSocialLoginActive={true}
